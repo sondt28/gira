@@ -12,6 +12,6 @@ public class WelcomeController {
 
 	@GetMapping
 	public Object welcome() {
-		return new ResponseEntity<>("Welcome to my application !", HttpStatus.OK);
+		return new ResponseEntity<>("Welcome to my application!", HttpStatus.OK);
 	}
 }
