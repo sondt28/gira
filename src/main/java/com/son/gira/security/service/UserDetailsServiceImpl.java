@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.son.gira.common.exception.GiraException;
+import com.son.gira.common.exception.GiraAppException;
 import com.son.gira.user.model.User;
 import com.son.gira.user.repository.UserRepository;
 
@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		User user = repository.findByEmail(email)
-							.orElseThrow(() -> new GiraException("Email not found!"));
+							.orElseThrow(() -> new GiraAppException("Email not found!"));
 		
 		return new org.springframework.security.core.userdetails.
 				User(email, email, null);

@@ -1,5 +1,6 @@
 package com.son.gira.role.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -29,9 +30,12 @@ public class Role {
 	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "description")
+	private String description;
+	
 	@ManyToMany
 	@JoinTable(name = "role_group_role", 
 				joinColumns = @JoinColumn(name = "role_id"), 
 				inverseJoinColumns = @JoinColumn(name = "group_role_id"))
-	private Set<GroupRole> groupRoles;
+	private Set<GroupRole> groupRoles = new HashSet<>();
 }

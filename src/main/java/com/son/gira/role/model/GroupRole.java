@@ -1,6 +1,7 @@
 package com.son.gira.role.model;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,9 +30,25 @@ public class GroupRole {
 	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "description")
+	private String description;
+	
 	@ManyToMany
 	@JoinTable(name = "role_group_role", 
 				joinColumns = @JoinColumn(name = "group_role_id"),
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+	private List<Role> roles;
+	
+	public void addRole(Role role) {
+		if (roles == null)
+			roles = new ArrayList<>();
+		
+		roles.add(role);
+		role.getGroupRoles().add(this);
+	}
+	
+	public void removeRole(Role role) {
+		roles.remove(role);
+		role.getGroupRoles().remove(this);
+	}
 }
